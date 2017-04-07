@@ -4,19 +4,31 @@ import java.util.List;
 
 public class Animal {
   public String name;
+  public String color;
+  public String picture;
   public int id;
 
-  public Animal(String name) {
+  public Animal(String name, String color, String picture) {
     this.name = name;
+    this.color = color;
+    this.picture = picture;
     this.id = id;
   }
 
   public String getName() {
-    return name;
+    return this.name;
+  }
+
+  public String getColor() {
+    return this.color;
+  }
+
+  public String getPicture() {
+    return this.picture;
   }
 
   public int getId() {
-    return id;
+    return this.id;
   }
 
   @Override
@@ -31,9 +43,11 @@ public class Animal {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name) VALUES (:name);";
+      String sql = "INSERT INTO animals (name, color, picture) VALUES (:name, :color, :picture);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
+        .addParameter("color", this.color)
+        .addParameter("picture", this.picture)
         .executeUpdate()
         .getKey();
     }
@@ -57,12 +71,14 @@ public class Animal {
     }
   }
 
-  public void updateName(String name) {
+  public void update() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE animals SET name=:name WHERE id=:id;";
+      String sql = "UPDATE animals SET (name=:name, color=:color, picture=:picture) WHERE id=:id;";
       con.createQuery(sql)
         .addParameter("id", id)
         .addParameter("name", name)
+        .addParameter("color", color)
+        .addParameter("picture", picture)
         .executeUpdate();
     }
   }
