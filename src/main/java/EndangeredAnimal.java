@@ -104,6 +104,4 @@ public class EndangeredAnimal {
       return sightings;
     }
   }
-
-
 }

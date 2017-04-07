@@ -15,20 +15,22 @@
           <li>Animal: $animal.getName()</li>
           <li>Color: $animal.getColor()</li>
         </ul>
-        <ul>
-          #if($animal.getSightings().size() == 0)
-            <h3>Sightings</h3>
+        #if($animal.getSightings().size() == 0)
+          <ul>
             <li>No sightings listed.</li>
             <li>To report a sighting, please visit the <a href="/">home page</a>.</li>
-          #else
-            #foreach($sighting in $animal.getSightings())
+          </ul>
+        #else
+          #foreach($sighting in $animal.getSightings())
+            <h3>Sighting Report</h3>
+            <ul>
               <li>Report Time: $sighting.getTime()</li>
               <li>Location: $sighting.getLocation()</li>
               <li>Ranger ID: $sighting.getRangerId()</li>
               <li>Sighting ID: $sighting.getId()</li>
-            #end
+            </ul>
           #end
-        </ul>
+        #end
       </div>
     </div>
   </div>

@@ -4,17 +4,27 @@
       <h1 class="animal-name">Rangers</h1>
     </div>
   </div>
-  <div class="row">
-    #if ($rangers.size() >= 0)
+  #if ($rangers.size() >= 0)
+    <!-- <div class="row"> -->
+    <ul>
       #foreach ($ranger in $rangers)
-        <div class="col-md-3">
-          <a href="/ranger/$ranger.getId()"><img src="https://s3-us-west-2.amazonaws.com/forest-epicodus-friday-project/ranger.png" alt="$ranger.getName()"></a>
-        </div>
+        <li><a href="/ranger/$ranger.getId()">$ranger.getName()</a></li>
       #end
-    #else
-      <h1>No Rangers in the system</h1>
-    #end
-  </div>
+    </ul>
+        <!-- <div class="col-md-3">
+          <div class="gallery">
+            <div class="gallery-image">
+              <img src="tree.jpg"/>
+              <div class="gallery-text">
+                <h3>$ranger.getName()</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div> -->
+  #else
+    <h1>No Rangers in the system</h1>
+  #end
   <div class="row">
     <div class="col-md-12">
       <h2>Click the button below, to add a Ranger!</h2>
