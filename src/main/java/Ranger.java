@@ -1,3 +1,7 @@
+import org.sql2o.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ranger implements RangerDuties {
   private int id;
   private int badge_number;
@@ -56,6 +60,16 @@ public class Ranger implements RangerDuties {
       String sql = "SELECT * FROM rangers;";
       return con.createQuery(sql)
         .executeAndFetch(Ranger.class);
+    }
+  }
+
+  public List<Sighting> getSightings() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM sightings WHERE ranger_id=:id;";
+        List<Sighting> sightings = con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeAndFetch(Sighting.class);
+      return sightings;
     }
   }
 
