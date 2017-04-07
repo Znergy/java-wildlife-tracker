@@ -1,29 +1,43 @@
-<h4><a href="/">Home</a></h4>
+<div class="well">
+  <h1>Add Animal to Database</h1>
 
-<h1>Add Animal to Database</h1>
+  <form action="/animal/new" method="post">
+    <div class="row">
+      <div class="col-md-12">
+        <label>Animal Species</label>
+        <input type="text" name="name">
 
-<form action="/animal/new" method="post">
-  <label>Animal Species</label>
-  <input type="text" name="name">
-  <label>Endangered?</label>
-  <input type="checkbox" name="endangered">
+        <label>Endangered?</label>
+        <input type="checkbox" name="endangered">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>More information for non-endangered</h3>
+        <label>Animal Color</label>
+        <input type="text" name="color">
+        <label>Animal Picture</label>
+        <input type="text" value="https://s3-us-west-2.amazonaws.com/forest-epicodus-friday-project/kangaroo.jpg" name="picture">
+      </div>
+      <div class="col-md-6">
+        <h3>More information for endangered</h3>
+        <label>Health</label>
+        <select name="health">
+          <option>Sick</option>
+          <option>Okay</option>
+          <option>Healthy</option>
+        </select>
 
-  <h3>Additional Info for Endangered Animals:</h3>
-
-  <label>Health</label>
-  <select name="health">
-    <option>Ill</option>
-    <option>Okay</option>
-    <option>Healthy</option>
-  </select>
-
-  <label>Age</label>
-  <select name="age">
-    <option>Newborn</option>
-    <option>Young</option>
-    <option>Adult</option>
-  </select>
-
-  <button type="submit">Add Animal</button>
-  
-</form>
+        <label>Age</label>
+        <select name="age">
+          <option>Newborn</option>
+          <option>Young</option>
+          <option>Adult</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Add Animal</button>
+      </div>
+    </div>
+  </form>
+</div>
