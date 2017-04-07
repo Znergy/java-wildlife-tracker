@@ -7,13 +7,16 @@ public class EndangeredAnimal {
   public int id;
   public boolean endangered;
   private String health;
+  private static final int newBorn = 1;
+  private static final int young = 3;
+  private static final int adult = 6;
   private String age;
 
   public EndangeredAnimal(String name, String health, String age) {
     this.name = name;
-    this.id = id;
     this.health = health;
     this.age = age;
+    this.id = id;
   }
 
   public String getHealth() {

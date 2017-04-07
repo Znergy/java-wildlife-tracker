@@ -6,13 +6,13 @@ import java.util.Arrays;
 public class Sighting {
   private int animal_id;
   private String location;
-  private String ranger_name;
+  private int ranger_id;
   private int id;
 
-  public Sighting(int animal_id, String location, String ranger_name) {
+  public Sighting(int animal_id, String location, int ranger_id) {
     this.animal_id = animal_id;
     this.location = location;
-    this.ranger_name = ranger_name;
+    this.ranger_id = ranger_id;
     this.id = id;
   }
 
@@ -28,8 +28,8 @@ public class Sighting {
     return location;
   }
 
-  public String getRangerName() {
-    return ranger_name;
+  public int getRangerId() {
+    return ranger_id;
   }
 
   @Override
@@ -38,17 +38,17 @@ public class Sighting {
       return false;
     } else {
       Sighting newSighting = (Sighting) otherSighting;
-      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocation().equals(newSighting.getLocation()) && this.getRangerName().equals(newSighting.getRangerName());
+      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocation().equals(newSighting.getLocation()) && this.getRangerId().equals(newSighting.getRangerId());
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (animal_id, location, ranger_name) VALUES (:animal_id, :location, :ranger_name);";
+      String sql = "INSERT INTO sightings (animal_id, location, ranger_id) VALUES (:animal_id, :location, :ranger_id);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("animal_id", this.animal_id)
         .addParameter("location", this.location)
-        .addParameter("ranger_name", this.ranger_name)
+        .addParameter("ranger_id", this.ranger_id)
         .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
