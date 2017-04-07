@@ -1,16 +1,36 @@
-<h4><a href="/">Home</a></h4>
-
-<h1>$endangeredAnimal.getName()</h1>
-<h3>ID: $endangeredAnimal.getId()</h3>
-
-#if($endangeredAnimal.getSightings().size() == 0)
-  <p>To report a sighting, please visit the <a href="/">home page</a>.</p>
-#else
-  #foreach($sighting in $endangeredAnimal.getSightings())
-    Location: <strong>$sighting.getLocation()</strong>
-    Health: $endangeredAnimal.getHealth()
-    Age: $endangeredAnimal.getAge()
-    Reported by: $sighting.getRangerName()
-    ID: $sighting.getId()
-  #end
-#end
+<div class="well">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="animal-name">$endangeredAnimal.getName()</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="https://s3-us-west-2.amazonaws.com/forest-epicodus-friday-project/endangered.png" class="img-responsive" alt="$endangeredAnimal.getName()">
+    </div>
+    <div class="col-md-6">
+      <div class="animal-details">
+        <h3>More details</h3>
+        <ul>
+          <li>Animal: $endangeredAnimal.getName()</li>
+          <li>Health: $endangeredAnimal.getHealth()</li>
+          <li>Age: $endangeredAnimal.getAge()</li>
+        </ul>
+        <ul>
+          #if($animal.getSightings().size() == 0)
+            <h3>Sightings</h3>
+            <li>No sightings listed.</li>
+            <li>To report a sighting, please visit the <a href="/">home page</a>.</li>
+          #else
+            #foreach($sighting in $animal.getSightings())
+              <li>Report Time: $sighting.getTime()</li>
+              <li>Location: $sighting.getLocation()</li>
+              <li>Ranger ID: $sighting.getRangerId()</li>
+              <li>Sighting ID: $sighting.getId()</li>
+            #end
+          #end
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
