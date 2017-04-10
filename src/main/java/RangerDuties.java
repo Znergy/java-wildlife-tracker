@@ -3,6 +3,5 @@ public interface RangerDuties {
   public int getBadgeNumber();
   public int getId();
   public String getPhoneNumber();
-  public void save();
   public void update();
 }

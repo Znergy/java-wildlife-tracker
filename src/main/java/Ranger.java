@@ -2,7 +2,7 @@ import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ranger implements RangerDuties {
+public class Ranger implements RangerDuties, DatabaseManagement {
   private int id;
   private int badge_number;
   private String name;

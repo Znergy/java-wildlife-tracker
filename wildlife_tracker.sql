@@ -147,7 +147,8 @@ CREATE TABLE sightings (
     id integer NOT NULL,
     animal_id integer,
     location character varying,
-    ranger_id integer
+    ranger_id integer,
+    "time" character varying
 );
 
 
@@ -207,6 +208,8 @@ ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq
 --
 
 COPY animals (id, name, color, picture) FROM stdin;
+9	Kangaroo	brown	https://s3-us-west-2.amazonaws.com/forest-epicodus-friday-project/kangaroo.jpg
+10	Chicken	yellow	https://s3-us-west-2.amazonaws.com/forest-epicodus-friday-project/kangaroo.jpg
 \.
 
 
@@ -214,7 +217,7 @@ COPY animals (id, name, color, picture) FROM stdin;
 -- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ryanjones
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 8, true);
+SELECT pg_catalog.setval('animals_id_seq', 10, true);
 
 
 --
@@ -222,6 +225,7 @@ SELECT pg_catalog.setval('animals_id_seq', 8, true);
 --
 
 COPY endangered_animals (id, name, health, age) FROM stdin;
+5	rare kangaroo	Sick	Newborn
 \.
 
 
@@ -229,7 +233,7 @@ COPY endangered_animals (id, name, health, age) FROM stdin;
 -- Name: endangered_animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ryanjones
 --
 
-SELECT pg_catalog.setval('endangered_animals_id_seq', 4, true);
+SELECT pg_catalog.setval('endangered_animals_id_seq', 5, true);
 
 
 --
@@ -237,6 +241,7 @@ SELECT pg_catalog.setval('endangered_animals_id_seq', 4, true);
 --
 
 COPY rangers (id, badge_number, name, phone_number) FROM stdin;
+9	22	Ryan	5555555555
 \.
 
 
@@ -244,14 +249,17 @@ COPY rangers (id, badge_number, name, phone_number) FROM stdin;
 -- Name: rangers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ryanjones
 --
 
-SELECT pg_catalog.setval('rangers_id_seq', 8, true);
+SELECT pg_catalog.setval('rangers_id_seq', 9, true);
 
 
 --
 -- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: ryanjones
 --
 
-COPY sightings (id, animal_id, location, ranger_id) FROM stdin;
+COPY sightings (id, animal_id, location, ranger_id, "time") FROM stdin;
+10	9	portland	12	04/10/2017 8:07:53 AM
+11	10	Portland	23	04/10/2017 8:17:53 AM
+12	5	Seattle	23	04/10/2017 8:18:52 AM
 \.
 
 
@@ -259,7 +267,7 @@ COPY sightings (id, animal_id, location, ranger_id) FROM stdin;
 -- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ryanjones
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 9, true);
+SELECT pg_catalog.setval('sightings_id_seq', 12, true);
 
 
 --
