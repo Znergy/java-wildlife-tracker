@@ -1,35 +1,43 @@
 import org.sql2o.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+import java.sql.Timestamp;
+import java.sql.Time;
+import java.util.Date;
+import java.text.DateFormat;
 
 public class Sighting {
   private int animal_id;
   private String location;
   private int ranger_id;
   private int id;
+  private String time;
 
   public Sighting(int animal_id, String location, int ranger_id) {
     this.animal_id = animal_id;
     this.location = location;
     this.ranger_id = ranger_id;
     this.id = id;
+    this.time = new java.text.SimpleDateFormat("MM/dd/yyyy h:mm:ss a").format(new Date());
   }
 
   public int getId() {
-    return id;
+    return this.id;
   }
 
   public int getAnimalId() {
-    return animal_id;
+    return this.animal_id;
   }
 
   public String getLocation() {
-    return location;
+    return this.location;
   }
 
   public int getRangerId() {
-    return ranger_id;
+    return this.ranger_id;
+  }
+
+  public String getTime() {
+    return this.time;
   }
 
   @Override
@@ -44,11 +52,12 @@ public class Sighting {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (animal_id, location, ranger_id) VALUES (:animal_id, :location, :ranger_id);";
+      String sql = "INSERT INTO sightings (animal_id, location, ranger_id, time) VALUES (:animal_id, :location, :ranger_id, :time);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("animal_id", this.animal_id)
         .addParameter("location", this.location)
         .addParameter("ranger_id", this.ranger_id)
+        .addParameter("time", this.time)
         .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
